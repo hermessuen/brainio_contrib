@@ -12,13 +12,12 @@ from tqdm import tqdm
 from brainio_base.stimuli import StimulusSet
 from brainio_base.assemblies import NeuronRecordingAssembly
 
-#from packaging_functions.packagingFunctions import package_stimulus_set, package_data_assembly
 
 from brainio_contrib.packaging import package_stimulus_set, package_data_assembly
 
-storage_location = "C:\\Users\\hsuen\\OneDrive - MathWorks\\Desktop\\MITLab\\electrodeProject\\data1" \
-                   "\\brainscore_img_elec_time_70hz150" \
-                   "\\brainscore_img_elec_time_70hz150\\"
+storage_location = ("C:/Users/hsuen/OneDrive - MathWorks/Desktop/MITLab/electrodeProject/data1" +
+                        "/brainscore_img_elec_time_70hz150" +
+                   "/brainscore_img_elec_time_70hz150/")
 
 
 # This needs to return a stimulus set
@@ -35,7 +34,7 @@ def collect_stimuli(stimuli_directory):
     for x in range(len(labels)):
         stimuli.append({
             'image_id': stim_sequence[x].decode('UTF-8'),  # extract just the ID
-            'image_file_name': stimuli_directory + "stimuli\\" + str(stim_sequence[x].decode('UTF-8')) + ".jpg",
+            'image_file_name': stimuli_directory + "stimuli/" + str(stim_sequence[x].decode('UTF-8')) + ".jpg",
             'image_number': x,
             'label': labels[x],
         })
