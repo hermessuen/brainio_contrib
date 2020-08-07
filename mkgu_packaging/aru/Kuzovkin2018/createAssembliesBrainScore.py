@@ -13,7 +13,7 @@ from brainio_base.stimuli import StimulusSet
 from brainio_base.assemblies import NeuronRecordingAssembly
 
 
-from brainio_contrib.packaging import package_stimulus_set, package_data_assembly
+from brainio_collection.packaging import package_stimulus_set, package_data_assembly
 
 storage_location = ("C:/Users/hsuen/Desktop/bigData/brainscore_img_elec_time_70hz150/")
 
@@ -79,10 +79,7 @@ def load_responses(response_file, stimuli):
 
     assembly = NeuronRecordingAssembly(assembly)
 
-    # add time info
-    # assembly = assembly.expand_dims('time_bin')
-    # assembly['time_bin_start'] = 'time_bin', [0]
-    # assembly['time_bin_end'] = 'time_bin', [1]
+
     assembly = assembly.transpose('presentation', 'neuroid', 'time_bin')
     return assembly
 
@@ -95,11 +92,11 @@ def main():
     assembly.name = 'aru.Kuzovkin2018'
 
     print("Packaging stimuli")
-    package_stimulus_set(stimuli, stimulus_set_name=stimuli.name,
-                         bucket_name="brainio-contrib")
+    package_stimulus_set(stimuli, stimulus_set_identifier=stimuli.name,
+                         bucket_name="brainio.contrib")
     print("Packaging assembly")
-    package_data_assembly(assembly, data_assembly_name=assembly.name, stimulus_set_name=stimuli.name,
-                          bucket_name="brainio-contrib")
+    package_data_assembly(assembly, assembly_identifier=assembly.name, stimulus_set_identifier=stimuli.name,
+                          bucket_name="brainio.contrib")
 
 
 if __name__ == '__main__':
